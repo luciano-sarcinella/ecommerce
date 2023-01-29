@@ -1,6 +1,6 @@
-// import { Productos } from "./Productos";
+import { Productos } from "./Productos";
 import { Link, useParams } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useDispatch, useSelector } from 'react-redux'
 import { small } from '../../utils/gridSlice'
 import { fetchProductos, selectAllProductos } from "../../utils/productosSlice";
@@ -22,12 +22,14 @@ const ProductosList = () => {
   useEffect(() => {
     if (productosStatus === 'idle') {
       dispatch(fetchProductos(pageId))
-    }
+    } 
   }, [productosStatus, dispatch,pageId])
 
-  
   const productos = useSelector(selectAllProductos)
+  console.log(pageId);
+  // const productos = prod[0]
   console.log(productos);
+  
 
   return (
       <div className="container px-lg-3">
@@ -58,7 +60,7 @@ const ProductosList = () => {
                 <h5 className="text-uppercase mb-4">Categorias</h5>
                   <div className="py-2 px-4 bg-dark text-white mb-3"><strong className="small text-uppercase fw-bold">Indumentaria</strong></div>
                   <ul className="list-unstyled small text-muted ps-lg-4 font-weight-normal">
-                    <li className="mb-2"><Link className="reset-anchor" to="/productos/remeras">Remeras</Link></li>
+                    <li className="mb-2"><Link className="reset-anchor" to="/productos/remeras"   >Remeras</Link></li>
                     <li className="mb-2"><Link className="reset-anchor" to="/productos/buzos">Buzos</Link></li>
                   </ul>
                   <div className="py-2 px-4 bg-light mb-3"><strong className="small text-uppercase fw-bold">Zapatillas</strong></div>
@@ -109,29 +111,29 @@ const ProductosList = () => {
                     <p className="text-sm text-muted mb-0">Mostrando 12 de 61 resultados</p>
                   </div>
                   <div className="col-lg-6">
-                    <ul className="list-inline d-flex align-items-center justify-content-lg-end mb-0">
+                    <ul className="list-inline d-flex align-items-center justify-content-lg-end mb-0"> 
                       <li className="list-inline-item text-muted me-3"><button className="btn reset-anchor rounded-0" onClick={()=>dispatch(small())}><FontAwesomeIcon icon={faTableCellsLarge}/></button></li>
                       <li className="list-inline-item">
                       <li className="nav-item dropdown"><Link className="nav-link dropdown-toggle" id="pagesDropdown" href="/" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ordenar por</Link>
                         <div className="dropdown-menu mt-3 shadow-sm" aria-labelledby="pagesDropdown">
-                          {/* <Link className="dropdown-item border-0 transition-link" onClick={()=>dispatch(popularidad({productos: productos}))}>Popularidad</Link> */}
-                          {/* <Link className="dropdown-item border-0 transition-link" onClick={()=>ordenarMenor()}>Precio:Menor a mayor</Link> */}
-                          {/* <Link className="dropdown-item border-0 transition-link" onClick={()=>dispatch(mayor({productos: productos}))}>Precio: Mayor a menor</Link> */}
+                          <Link className="dropdown-item border-0 transition-link" >Popularidad</Link>
+                          <Link className="dropdown-item border-0 transition-link" >Precio:Menor a mayor</Link>
+                          <Link className="dropdown-item border-0 transition-link" >Precio: Mayor a menor</Link>
                         </div>
                       </li>
-                        {/* <select className="selectpicker text-sm text-muted mb-0" data-customclass="form-control form-control-sm">
+                        <select className="selectpicker text-sm text-muted mb-0" data-customclass="form-control form-control-sm"> 
                           <option value>Ordenar por </option>
                           <option value="popularidad">Popularidad</option>
                           <option value="low-high">Precio: Menor a Mayor</option>
                           <option value="high-low">Precio: Mayor a menor </option>
-                        </select> */}
+                        </select> 
                       </li>
                     </ul>
                   </div>
                 </div>
                 <div className="row">
 
-                  {/* <Productos productos = {productos}/> */}
+                  <Productos productos = {productos}/>
 
                 </div>
 
