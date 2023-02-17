@@ -1,7 +1,3 @@
-// import Zapatillas from '../../img/cat-img-2.jpg';
-// import Relojes from '../../img/cat-img-3.jpg';
-// import Indumentaria from '../../img/cat-img-1.jpg';
-// import Electronica from '../../img/cat-img-4.jpg';
 import { Link } from 'react-router-dom';
 
 const  Categorias  = ()  => {

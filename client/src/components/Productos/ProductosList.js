@@ -1,36 +1,88 @@
-import { Productos } from "./Productos";
-import { Link, useParams } from "react-router-dom"
-import { useEffect } from "react"
-import { useDispatch, useSelector } from 'react-redux'
-import { small } from '../../utils/gridSlice'
-import { fetchProductos, selectAllProductos } from "../../utils/productosSlice";
-// import { menor} from '../../utils/ordenarSlice'
-// import { getProductos,selectProductosValue } from "../../utils/ordenarSlice";
-
-
+import { ProductoCard} from './ProductoCard'
+import { Spinner} from '../Spinner/Spinner'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTableCellsLarge } from '@fortawesome/free-solid-svg-icons'
-
+import { faTableCells } from '@fortawesome/free-solid-svg-icons'
+import { useGetProductosQuery } from "../../utils/apiSlice"
+import { small, large } from '../../utils/gridSlice'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux' 
+import { Link, useParams } from "react-router-dom"
 
 const ProductosList = () => {
-  // const [productos ,setProductos] = useState([])
-  const {pageId} = useParams()
   const dispatch = useDispatch()
-  const productosStatus = useSelector(state => state.productos.status)
+  const [selected, setSelected] = useState('popularidad');
+  const {pageId} = useParams()
+  const pageIdAsNumber = parseInt(pageId);
 
+  const handleChange = event => {
+    setSelected(event.target.value);
+  }
 
-  useEffect(() => {
-    if (productosStatus === 'idle') {
-      dispatch(fetchProductos(pageId))
-    } 
-  }, [productosStatus, dispatch,pageId])
+  const { 
+    data: productos = [],
+    isLoading,
+    isSuccess,
+    isError,
+    error
+  } = useGetProductosQuery(pageId)
 
-  const productos = useSelector(selectAllProductos)
-  console.log(pageId);
-  // const productos = prod[0]
-  console.log(productos);
+  let content
+  if (isLoading) {
+    content = <Spinner/>
+  } else if (isSuccess & selected === 'popularidad' ) {
+    content = productos.map(producto =>
+      <ProductoCard
+        key = {producto.id} 
+        id = {producto.id}
+        titulo = {producto.titulo}
+        descripcion = {producto.descripcion}
+        precio = {producto.precio}
+        categoria = {producto.categoria}
+        url = {producto.url}
+        new = {producto.new}
+        sale = {producto.sale}
+        sold = {producto.sold}
+      />
+    )
+  } else if(isSuccess & selected === 'low-high'){
+    const productosSlice = productos.slice()
+    const productosMenor = productosSlice.sort((a,b) =>a.precio -b.precio)
+    content = productosMenor.map(producto =>
+      <ProductoCard
+        key = {producto.id} 
+        id = {producto.id}
+        titulo = {producto.titulo}
+        descripcion = {producto.descripcion}
+        precio = {producto.precio}
+        categoria = {producto.categoria}
+        url = {producto.url}
+        new = {producto.new}
+        sale = {producto.sale}
+        sold = {producto.sold}
+      />
+    )
+  } else if (isSuccess & selected === 'high-low') {
+    const productosSlice = productos.slice()
+    const productosMenor = productosSlice.sort((a,b) =>b.precio -a.precio)
+    content = productosMenor.map(producto => 
+      <ProductoCard
+        key = {producto.id} 
+        id = {producto.id}
+        titulo = {producto.titulo}
+        descripcion = {producto.descripcion}
+        precio = {producto.precio}
+        categoria = {producto.categoria}
+        url = {producto.url}
+        new = {producto.new}
+        sale = {producto.sale}
+        sold = {producto.sold}
+      />
+    )
+  } else if (isError) {
+    content = <div>{error.toString()}</div>
+  }
   
-
   return (
       <div className="container px-lg-3">
         <div className="container">
@@ -51,7 +103,6 @@ const ProductosList = () => {
             </div>
           </div>
         </section>
-
         <section className="py-5">
           <div className="container p-0">
             <div className="row">
@@ -112,17 +163,11 @@ const ProductosList = () => {
                   </div>
                   <div className="col-lg-6">
                     <ul className="list-inline d-flex align-items-center justify-content-lg-end mb-0"> 
-                      <li className="list-inline-item text-muted me-3"><button className="btn reset-anchor rounded-0" onClick={()=>dispatch(small())}><FontAwesomeIcon icon={faTableCellsLarge}/></button></li>
+                      <li className="list-inline-item text-muted me-3"><button className="btn reset-anchor rounded-0" onClick={()=>dispatch(small())}><FontAwesomeIcon icon={faTableCells}/></button></li>
+                      <li className="list-inline-item text-muted me-3"><button className="btn reset-anchor rounded-0" onClick={()=>dispatch(large())}><FontAwesomeIcon icon={faTableCellsLarge}/></button></li>
                       <li className="list-inline-item">
-                      <li className="nav-item dropdown"><Link className="nav-link dropdown-toggle" id="pagesDropdown" href="/" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ordenar por</Link>
-                        <div className="dropdown-menu mt-3 shadow-sm" aria-labelledby="pagesDropdown">
-                          <Link className="dropdown-item border-0 transition-link" >Popularidad</Link>
-                          <Link className="dropdown-item border-0 transition-link" >Precio:Menor a mayor</Link>
-                          <Link className="dropdown-item border-0 transition-link" >Precio: Mayor a menor</Link>
-                        </div>
-                      </li>
-                        <select className="selectpicker text-sm text-muted mb-0" data-customclass="form-control form-control-sm"> 
-                          <option value>Ordenar por </option>
+                        <select className="selectpicker text-sm text-muted mb-0" value={selected} onChange={handleChange} data-customclass="form-control form-control-sm"> 
+                          <option value="popularidad">Ordenar por </option>
                           <option value="popularidad">Popularidad</option>
                           <option value="low-high">Precio: Menor a Mayor</option>
                           <option value="high-low">Precio: Mayor a menor </option>
@@ -131,24 +176,27 @@ const ProductosList = () => {
                     </ul>
                   </div>
                 </div>
+
+                
                 <div className="row">
-
-                  <Productos productos = {productos}/>
-
+                  {content}
                 </div>
 
+                {pageIdAsNumber ?
                 <nav aria-label="Page navigation example">
                   <ul className="pagination justify-content-center justify-content-lg-end">
-                    {/* <li className="page-item mx-1"><a className="page-link" href="#!" aria-label="Previous"><span aria-hidden="true">«</span></a></li> */}
+                    {pageId >1 &&<li className="page-item mx-1"><Link className="page-link" to={`/productos/${pageId - 1}`}>«</Link></li>}
                     <li className="page-item mx-1"><Link className="page-link"  to="/productos/1">1</Link></li>
                     <li className="page-item mx-1"><Link className="page-link"  to="/productos/2">2</Link></li>
                     <li className="page-item mx-1"><Link className="page-link"  to="/productos/3">3</Link></li>
                     <li className="page-item mx-1"><Link className="page-link"  to="/productos/4">4</Link></li>
                     <li className="page-item mx-1"><Link className="page-link"  to="/productos/5">5</Link></li>
                     <li className="page-item mx-1"><Link className="page-link"  to="/productos/6">6</Link></li>
-                    {/* <li className="page-item ms-1"><a className="page-link" href="#!" aria-label="Next"><span aria-hidden="true">»</span></a></li> */}
+                    {pageId < 6 &&<li className="page-item mx-1"><Link className="page-link" to={`/productos/${Number(pageId) + 1}`}>»</Link></li>}
                   </ul>
                 </nav>
+                : ''
+                }
               </div>
             </div>
           </div>

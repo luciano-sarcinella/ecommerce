@@ -1,12 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
+import { apiSlice } from './apiSlice'
+// import counterReducer from './counterSlice'
 import gridReducer from './gridSlice'
-import ordenarReducer from './ordenarSlice'
-import productosReducer from './productosSlice'
+import carritoReducer from './carritoSlice'
 
 export default configureStore({
   reducer: {
     grid: gridReducer,
-    ordenar:ordenarReducer,
-    productos:productosReducer
-  }
+    carrito: carritoReducer,
+    [apiSlice.reducerPath]: apiSlice.reducer
+  },
+  middleware: getDefaultMiddleware =>
+  getDefaultMiddleware().concat(apiSlice.middleware)
 })

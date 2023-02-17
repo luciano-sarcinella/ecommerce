@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route} from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 import Carrito from './components/Carrito/Carrito';
 import Checkout from './components/Checkout/Checkout';
@@ -17,6 +17,7 @@ function App() {
           <Route path="/" element ={<Home/>}/>
           <Route path="productos/:pageId" element ={<Productos/>}/>
           <Route path="carrito" element ={<Carrito/>}/>
+          <Route path="productos/1/carrito" element={<Navigate replace to="/carrito" />} />
           <Route path="/carrito/checkout" element ={<Checkout/>}/>
           <Route path="/ingresar" element ={<Login/>}/>
         </Routes>

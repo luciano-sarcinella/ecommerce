@@ -2,11 +2,10 @@ import { createSlice } from '@reduxjs/toolkit'
 
 export const gridSlice = createSlice({
     name:'grid',
-    initialState: {value:{large:false}},
+    initialState: {value:'large'},
     reducers:{
-        small: (state, action)=>{
-            state.value.large = !state.value.large},
-        large: state=>{state.value.large = !state.value.large}
+        large: state=>{state.value = 'large'},
+        small: state=>{state.value = 'small'}
     }
 })
 

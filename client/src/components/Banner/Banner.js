@@ -1,4 +1,4 @@
-import Background from '../../img/hero-banner-alt.jpg'
+import Background from '../../img/img-nuevas/hero-banner-alt.jpg'
 import {Link} from 'react-router-dom'
 
 

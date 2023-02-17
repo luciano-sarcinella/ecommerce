@@ -3,8 +3,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import { useSelector } from 'react-redux'
+import { cantidadProductos} from '../../utils/carritoSlice';
+
 
 const NavBar = () => {
+  const count = useSelector(cantidadProductos);
+
   return (
     <header className="header bg-white">
       <div className="container px-lg-3">
@@ -19,11 +24,11 @@ const NavBar = () => {
                 <Link className="nav-link" to="productos/1">Productos</Link>
               </li>
               <li className="nav-item dropdown"><Link className="nav-link dropdown-toggle" id="pagesDropdown" href="/" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categorias</Link>
-                <div className="dropdown-menu mt-3 shadow-sm" aria-labelledby="pagesDropdown"><Link className="dropdown-item border-0 transition-link"  to="/">Inicio</Link><Link className="dropdown-item border-0 transition-link"  to="productos">Productos</Link><Link className="dropdown-item border-0 transition-link"  to="carrito">Carrito</Link><Link className="dropdown-item border-0 transition-link"  to="ingresar">Ingresar</Link><Link className="dropdown-item border-0 transition-link" to="carrito/checkout">Checkout</Link></div>
+                <div className="dropdown-menu mt-3 shadow-sm" aria-labelledby="pagesDropdown"><Link className="dropdown-item border-0 transition-link"  to="/productos/indumentaria">Indumentaria</Link><Link className="dropdown-item border-0 transition-link"  to="/productos/zapatillas">Zapatillas</Link><Link className="dropdown-item border-0 transition-link"  to="/productos/relojes">Relojes</Link><Link className="dropdown-item border-0 transition-link"  to="/productos/electronica">Electronica</Link></div>
               </li>
             </ul>
             <ul className="navbar-nav ms-auto">               
-              <li className="nav-item"><Link className="nav-link" to="carrito" > <FontAwesomeIcon icon={faCartShopping} /> Carrito<small className="text-gray fw-normal">(2)</small></Link></li>
+              <li className="nav-item"><Link className="nav-link" to="carrito" > <FontAwesomeIcon icon={faCartShopping} /> Carrito<small className="text-gray fw-normal">({count})</small></Link></li>
               <li className="nav-item"><a className="nav-link" href="#!"> <FontAwesomeIcon icon={faHeart} /><small className="text-gray fw-normal"> (0)</small></a></li>
               <li className="nav-item"><Link className="nav-link" to="ingresar" ><FontAwesomeIcon icon={faUser}/> Ingresar</Link></li>
             </ul>
