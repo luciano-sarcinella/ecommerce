@@ -22,5 +22,6 @@ Router.get('/productos/1',ProductCtrl.productos1)
     .get('/productos/headphones',ProductCtrl.headphones)
     .get('/productos/earbuds',ProductCtrl.earbuds)
     .get('/productos/speakers',ProductCtrl.speakers)
+    .get('/inicio',ProductCtrl.masVendidos)
 
 module.exports = Router;

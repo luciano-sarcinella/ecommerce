@@ -22,6 +22,7 @@ export const Modal =({ titulo, precio, url, onClose,id }) => {
     )
     navigate('/carrito')
   }
+  
   return(
     <div className="modal fade" id="staticBackdrop" data-bs-backdrop="true" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div className="modal-dialog modal-lg modal-dialog-centered">

@@ -1,7 +1,6 @@
 const {options} = require('../../../config/config');
 const knex = require('knex')(options);
 
-
 async function productos1 (req, res){
     try {
       let response = await knex.from('productos')
@@ -193,6 +192,25 @@ async function speakers (req, res){
       res.send(error)
   }
 };
+async function masVendidos (req, res){
+  const randomNumbers = [];
+
+  while (randomNumbers.length < 3) {
+    const randomNumber = Math.floor(Math.random() * 61 + 1);
+
+    if (!randomNumbers.includes(randomNumber)) {
+      randomNumbers.push(randomNumber);
+    } 
+  }
+  try {
+    let response = await knex.from('productos')
+    .select('id','titulo','descripcion','precio','categoria','tag', 'url','new','sale','sold')
+    .whereIn('id', randomNumbers)
+    res.json(response)
+  } catch (error) {
+      res.send(error)
+  }
+};
 
 module.exports = {
   productos1,
@@ -213,5 +231,6 @@ module.exports = {
   electronica,
   headphones,
   earbuds,
-  speakers
+  speakers,
+  masVendidos
   };

@@ -8,9 +8,9 @@ import { faGift } from '@fortawesome/free-solid-svg-icons'
 import { useSelector, useDispatch } from "react-redux"
 import { Link} from "react-router-dom"
 import { todosProductos,cantidadProductos, productoDeleted,increment,decrement,selectCount,valorTotal  } from "../../utils/carritoSlice"
-// import Background from '../../img/img-nuevas/hero-banner-alt.jpg'
 
 const Producto = ({producto})  => {
+  
   const dispatch = useDispatch()
   const count = useSelector(state => selectCount(state, producto.id));
   const totalParcial = () => producto.precio * count;
@@ -19,7 +19,7 @@ const Producto = ({producto})  => {
   return(
     <tr>
       <th className="ps-0 py-3 border-light" scope="row">
-        <div className="d-flex align-items-center"><a className="reset-anchor d-block animsition-link" href="detail.html"><img src={`/img/img-nuevas/${producto.id}.png`} alt="..." width="70"/></a>
+        <div className="d-flex align-items-center"><a className="reset-anchor d-block animsition-link" href="detail.html"><img src={`/images/${producto.id}.png`} alt="..." width="70"/></a>
           <div className="ms-3"><strong className="h6"><a className="reset-anchor animsition-link" href="detail.html">{producto.titulo}</a></strong></div>
         </div>
       </th>
@@ -61,7 +61,7 @@ const Carrito = () => {
   ))
 
   return (
-    <div className="page-holder" >
+    <div className="page-holder py-5" >
       <div className="container">
         {/* ENCABEZADO */}
         <section className="py-5 bg-light">

@@ -10,7 +10,7 @@ const app = express();
 const Productos = require('./routes/productos');
 
 // Middlewares 
-app.use('/client/src/images/img-nuevas',express.static(__dirname + '/client/src/images/img-nuevas'));
+app.use('public',express.static(__dirname + '/public'));
 app.use(cors('*'))
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.json());

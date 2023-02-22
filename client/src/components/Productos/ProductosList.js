@@ -84,8 +84,8 @@ const ProductosList = () => {
   }
   
   return (
-      <div className="container px-lg-3">
-        <div className="container">
+    <div className="container px-lg-3 py-5">
+      <div className="container">
         <section className="py-5 bg-light">
           <div className="container">
             <div className="row px-4 px-lg-5 py-lg-4 align-items-center">
@@ -156,7 +156,6 @@ const ProductosList = () => {
                 </div>
 
               <div className="col-lg-9 order-1 order-lg-2 mb-5 mb-lg-0">
-
                 <div className="row mb-3 align-items-center">
                   <div className="col-lg-6 mb-2 mb-lg-0">
                     <p className="text-sm text-muted mb-0">Mostrando 12 de 61 resultados</p>
@@ -176,7 +175,6 @@ const ProductosList = () => {
                     </ul>
                   </div>
                 </div>
-
                 
                 <div className="row">
                   {content}
@@ -201,9 +199,8 @@ const ProductosList = () => {
             </div>
           </div>
         </section>
-
-    </div>  
-  </div>
+      </div>  
+    </div>
   )
 }
   

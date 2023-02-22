@@ -1,10 +1,8 @@
-
-
 const Checkout = () => {
   return (
     <div className="page-holder" >
         <div className="container" >
-            {/* HERO SECTION */}
+            {/* Encabezado */}
             <section className="py-5 bg-light">
                 <div className="container">
                     <div className="row px-4 px-lg-5 py-lg-4 align-items-center">
@@ -24,7 +22,7 @@ const Checkout = () => {
                 </div>
             </section>
             <section className="py-5">
-            {/* BILLING ADDRESS */}
+            {/* Datos comprador */}
             <h2 className="h5 text-uppercase mb-4">Detalle de facturacion</h2>
             <div className="row">
                 <div className="col-lg-8">
@@ -50,12 +48,6 @@ const Checkout = () => {
                         <label className="form-label text-sm text-uppercase" htmlFor="company">Nombre de compania (opcional) </label>
                         <input className="form-control form-control-lg" type="text" id="company" placeholder="Nombre de la compania"/>
                     </div>
-                    {/* <div className="col-lg-6 form-group">
-                        <label className="form-label text-sm text-uppercase" for="country">Pais</label>
-                        <select className="country" id="country" data-customclassName="form-control form-control-lg rounded-0">
-                        <option value>Choose your country</option>
-                        </select>
-                    </div> */}
                     <div className="col-lg-12">
                         <label className="form-label text-sm text-uppercase" htmlFor="address">Direccion</label>
                         <input className="form-control form-control-lg" type="text" id="address" placeholder="Calle y Altura"/>
@@ -80,6 +72,7 @@ const Checkout = () => {
                         </div>
                         </button>
                     </div>
+                    {/* Datos facturacion */}
                     <div className="collapse" id="alternateAddress">
                         <div className="row gy-3">
                         <div className="col-12 mt-4">
@@ -105,12 +98,7 @@ const Checkout = () => {
                         <label className="form-label text-sm text-uppercase" htmlFor="company">Nombre de compania (opcional) </label>
                         <input className="form-control form-control-lg" type="text" id="company" placeholder="Nombre de la compania"/>
                     </div>
-                    {/* <div className="col-lg-6 form-group">
-                        <label className="form-label text-sm text-uppercase" for="country">Pais</label>
-                        <select className="country" id="country" data-customclass="form-control form-control-lg rounded-0">
-                        <option value>Choose your country</option>
-                        </select>
-                    </div> */}
+
                     <div className="col-lg-12">
                         <label className="form-label text-sm text-uppercase" htmlFor="address">Direccion</label>
                         <input className="form-control form-control-lg" type="text" id="address" placeholder="Calle y Altura"/>
