@@ -12,7 +12,7 @@ const favoritoSlice = createSlice({
         state[productIndex].value += 1;
       } else {
         state.push(producto)        
-      }
+      }    
     },
     favoritoDeleted(state, action){
       const  id  = action.payload

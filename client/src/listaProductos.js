@@ -17,9 +17,9 @@ const productos = [
         categoria: 'zapatilla',
         tag: "deportiva",
         url: 'https://i.ibb.co/9Zt3VLq/zd2.png',
-        new: false,
-        sale: false,
-        sold: false
+        new: true,
+        sale: true,
+        sold: true
     },
     {   id: 3,
         titulo: 'Adidas Galaxy 6 R',
@@ -30,7 +30,7 @@ const productos = [
         url: 'https://i.ibb.co/x8D4V8h/zd3.png',
         new: false,
         sale: false,
-        sold: false
+        sold: true
     },
     {   id: 4,
         titulo: 'Adidas 4DFWD X PARLEY',
@@ -40,7 +40,7 @@ const productos = [
         tag: "deportiva",
         url: 'https://i.ibb.co/0ZNqG0J/zd4.png',
         new: false,
-        sale: false,
+        sale: true,
         sold: false
     },
     {   id: 5,

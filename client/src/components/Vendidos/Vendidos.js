@@ -34,6 +34,7 @@ const Vendidos = () => {
       new = {producto.new}
       sale = {producto.sale}
       sold = {producto.sold}
+      tag = {producto.tag}
       />
     )
   } else if (isError) {

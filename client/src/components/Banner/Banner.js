@@ -9,7 +9,7 @@ const Banner = () => {
                     <div className="row px-4 px-lg-5">
                     <div className="col-lg-6">
                         <p className="text-muted small text-uppercase mb-2">New Inspiration 2023</p>
-                        <h1 className="h2 text-uppercase mb-3">20% off Nueva temporada</h1><Link className="btn btn-dark rounded-0" to="productos/1">Ver Coleccion</Link>
+                        <h1 className="h2 text-uppercase mb-3">20% off Nueva temporada</h1><Link className="btn btn-dark rounded-0" to="../productos/1" relative='path'>Ver Coleccion</Link>
                     </div>
                     </div>
                 </div>

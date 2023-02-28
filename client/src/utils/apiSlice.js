@@ -10,14 +10,6 @@ export const apiSlice = createApi({
       getVendidos: builder.query({
         query: () => `inicio`      
       }),
-      addNewPost: builder.mutation({
-        query: productoId => ({
-          url: `detail/${productoId}` ,
-          method: 'POST',
-          // Include the entire post object as the body of the request
-          body: productoId
-        })
-      })
     }),
 })
 

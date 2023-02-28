@@ -1,5 +1,5 @@
 const express = require('express');
-const ProductCtrl = require('../components/productos/controller/controller');
+const DetailCtrl = require('../components/detail/controller/controller');
 
 const Router = express.Router();
 
@@ -23,6 +23,5 @@ Router.get('/productos/1',ProductCtrl.productos1)
     .get('/productos/earbuds',ProductCtrl.earbuds)
     .get('/productos/speakers',ProductCtrl.speakers)
     .get('/inicio',ProductCtrl.masVendidos)
-    .post('/detail',ProductCtrl.detail)
 
 module.exports = Router;

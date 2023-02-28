@@ -3,6 +3,7 @@ const knex = require('knex')(options);
 
 async function productos1 (req, res){
     try {
+      knex('productos')
       let response = await knex.from('productos')
       .select('id','titulo','descripcion','precio','categoria','tag', 'url','new','sale','sold')
       .where('id', '<=', '12')
@@ -211,6 +212,17 @@ async function masVendidos (req, res){
       res.send(error)
   }
 };
+async function detail (req, res){
+  console.log('entro a detail');
+  try {
+    let response = await knex.from('productos')
+    .select('id','titulo','descripcion','precio','categoria','tag', 'url','new','sale','sold')
+    .where('tag', '=', 'speakers')
+    res.json(response)
+  } catch (error) {
+      res.send(error)
+  }
+};
 
 module.exports = {
   productos1,
@@ -232,5 +244,6 @@ module.exports = {
   headphones,
   earbuds,
   speakers,
-  masVendidos
+  masVendidos,
+  detail
   };

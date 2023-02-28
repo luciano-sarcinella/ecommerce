@@ -14,11 +14,9 @@ const ProductosList = () => {
   const [selected, setSelected] = useState('popularidad');
   const {pageId} = useParams()
   const pageIdAsNumber = parseInt(pageId);
+  const [precioMaximo, setPrecioMaximo] = useState(1000);
 
-  const handleChange = event => {
-    setSelected(event.target.value);
-  }
-
+  
   const { 
     data: productos = [],
     isLoading,
@@ -27,11 +25,40 @@ const ProductosList = () => {
     error
   } = useGetProductosQuery(pageId)
 
+  const [envio, setEnvio] = useState(false);
+  const [llega, setLlega] = useState(false);
+  const [oferta, setOferta] = useState(false);
+
+  let listaFiltrada = productos;
+  
+  if (envio) {
+    listaFiltrada = listaFiltrada.filter(producto => producto.sold === 1);
+  }
+
+  if (llega) {
+    listaFiltrada = listaFiltrada.filter(producto => producto.new === 1);
+  }
+
+  if (oferta) {
+    listaFiltrada = listaFiltrada.filter(producto => producto.sale === 1);
+  }
+
+  listaFiltrada = listaFiltrada.filter(producto => producto.precio <= precioMaximo);
+
+
+  const handleChange = event => {
+    setSelected(event.target.value);
+  }
+
+  const handleMaximo = (event) => {
+    setPrecioMaximo(event.target.value);
+  };
+
   let content
   if (isLoading) {
     content = <Spinner/>
   } else if (isSuccess & selected === 'popularidad' ) {
-    content = productos.map(producto =>
+    content = listaFiltrada.map(producto =>
       <ProductoCard
         key = {producto.id} 
         id = {producto.id}
@@ -39,6 +66,7 @@ const ProductosList = () => {
         descripcion = {producto.descripcion}
         precio = {producto.precio}
         categoria = {producto.categoria}
+        tag = {producto.tag}
         url = {producto.url}
         new = {producto.new}
         sale = {producto.sale}
@@ -46,7 +74,7 @@ const ProductosList = () => {
       />
     )
   } else if(isSuccess & selected === 'low-high'){
-    const productosSlice = productos.slice()
+    const productosSlice = listaFiltrada.slice()
     const productosMenor = productosSlice.sort((a,b) =>a.precio -b.precio)
     content = productosMenor.map(producto =>
       <ProductoCard
@@ -56,6 +84,7 @@ const ProductosList = () => {
         descripcion = {producto.descripcion}
         precio = {producto.precio}
         categoria = {producto.categoria}
+        tag = {producto.tag}
         url = {producto.url}
         new = {producto.new}
         sale = {producto.sale}
@@ -63,7 +92,7 @@ const ProductosList = () => {
       />
     )
   } else if (isSuccess & selected === 'high-low') {
-    const productosSlice = productos.slice()
+    const productosSlice = listaFiltrada.slice()
     const productosMenor = productosSlice.sort((a,b) =>b.precio -a.precio)
     content = productosMenor.map(producto => 
       <ProductoCard
@@ -73,6 +102,7 @@ const ProductosList = () => {
         descripcion = {producto.descripcion}
         precio = {producto.precio}
         categoria = {producto.categoria}
+        tag = {producto.tag}
         url = {producto.url}
         new = {producto.new}
         sale = {producto.sale}
@@ -111,7 +141,7 @@ const ProductosList = () => {
                 <h5 className="text-uppercase mb-4">Categorias</h5>
                   <div className="py-2 px-4 bg-dark text-white mb-3"><strong className="small text-uppercase fw-bold">Indumentaria</strong></div>
                   <ul className="list-unstyled small text-muted ps-lg-4 font-weight-normal">
-                    <li className="mb-2"><Link className="reset-anchor" to="/productos/remeras"   >Remeras</Link></li>
+                    <li className="mb-2"><Link className="reset-anchor" to="/productos/remeras">Remeras</Link></li>
                     <li className="mb-2"><Link className="reset-anchor" to="/productos/buzos">Buzos</Link></li>
                   </ul>
                   <div className="py-2 px-4 bg-light mb-3"><strong className="small text-uppercase fw-bold">Zapatillas</strong></div>
@@ -133,24 +163,25 @@ const ProductosList = () => {
 
                   <h6 className="text-uppercase mb-4">Rango de Precio</h6>
                   <div className="price-range pt-4 mb-5">
-                    <input type="range" className="form-range" min="0" max="5" id="customRange2"/>
+                    <span className="me-2 small fw-bold text-uppercase">Mostrar hasta: ${precioMaximo}</span>
+                    <input type="range" className="form-range" min="0" max="1000" id="customRange2" value={precioMaximo} onChange={handleMaximo}/>
                     <div className="row pt-2">
-                      <div className="col-6"><strong className="small fw-bold text-uppercase">De $500</strong></div>
-                      <div className="col-6 text-end"><strong className="small fw-bold text-uppercase">A $10.000</strong></div>
+                      <div className="col-6"><strong className="small fw-bold text-uppercase">$0</strong></div>
+                      <div className="col-6 text-end"><strong className="small fw-bold text-uppercase">$1.000</strong></div>
                     </div>
                   </div>
 
                   <h6 className="text-uppercase mb-3">Mostrar Solo</h6>
                   <div className="form-check mb-1">
-                    <input className="form-check-input" type="checkbox" id="envio"/>
+                    <input className="form-check-input" type="checkbox" id="envio"  checked={envio} onChange={() => setEnvio(!envio)}/>
                     <label className="form-check-label" htmlFor="checkbox_2">Envio gratis</label>
                   </div>
                   <div className="form-check mb-1">
-                    <input className="form-check-input" type="checkbox" id="llega"/>
+                    <input className="form-check-input" type="checkbox" id="llega" checked={llega}onChange={() => setLlega(!llega)}/>
                     <label className="form-check-label" htmlFor="checkbox_4">Llega mañana</label>
                   </div>
                   <div className="form-check mb-4">
-                    <input className="form-check-input" type="checkbox" id="oferta"/>
+                    <input className="form-check-input" type="checkbox" id="oferta"  checked={oferta} onChange={() => setOferta(!oferta)}/>
                     <label className="form-check-label" htmlFor="checkbox_6">Ofertas de la semana</label>
                   </div>
                 </div>

@@ -14,9 +14,9 @@ const  Categorias  = ()  => {
                     <h2 className="h5 text-uppercase mb-4">Explora nuestras categorias</h2>
                 </header>
                 <div className="row">
-                    <div className="col-md-4"><Link className="category-item" to="productos/indumentaria"><img className="img-fluid" src={indumentaria} alt=""/><strong className="category-item-title">Indumentaria</strong></Link></div> 
-                    <div className="col-md-4"><Link className="category-item mb-4" to="productos/zapatillas"><img className="img-fluid" src={zapatillas} alt=""/><strong className="category-item-title">Zapatillas</strong></Link><Link className="category-item"  to="productos/relojes"><img className="img-fluid" src={relojes} alt=""/><strong className="category-item-title">Relojes</strong></Link></div>
-                    <div className="col-md-4"><Link className="category-item" to="productos/electronica"><img className="img-fluid" src={electronica} alt=""/><strong className="category-item-title">Electronica</strong></Link></div>
+                    <div className="col-md-4"><Link className="category-item" to="../productos/indumentaria" relative="path"><img className="img-fluid" src={indumentaria} alt=""/><strong className="category-item-title">Indumentaria</strong></Link></div> 
+                    <div className="col-md-4"><Link className="category-item mb-4" to="../productos/zapatillas" relative="path"><img className="img-fluid" src={zapatillas} alt=""/><strong className="category-item-title">Zapatillas</strong></Link><Link className="category-item"  to="../productos/relojes" relative="path"><img className="img-fluid" src={relojes} alt=""/><strong className="category-item-title">Relojes</strong></Link></div>
+                    <div className="col-md-4"><Link className="category-item" to="../productos/electronica" relative="path"><img className="img-fluid" src={electronica} alt=""/><strong className="category-item-title">Electronica</strong></Link></div>
                 </div>
             </section>
         </div>

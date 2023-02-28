@@ -30,7 +30,7 @@ const NavBar = () => {
             </ul>
             <ul className="navbar-nav ms-auto">               
               <li className="nav-item"><Link className="nav-link" to="carrito" > <FontAwesomeIcon icon={faCartShopping} /> Carrito<small className="text-gray fw-normal">({count})</small></Link></li>
-              <li className="nav-item"><a className="nav-link" href="#!"> <FontAwesomeIcon icon={faHeart} /><small className="text-gray fw-normal"> ({countFav})</small></a></li>
+              <li className="nav-item"><Link className="nav-link"  to="favoritos"> <FontAwesomeIcon icon={faHeart} /><small className="text-gray fw-normal"> ({countFav})</small></Link></li>
               <li className="nav-item"><Link className="nav-link" to="ingresar" ><FontAwesomeIcon icon={faUser}/> Ingresar</Link></li>
             </ul>
           </div>
